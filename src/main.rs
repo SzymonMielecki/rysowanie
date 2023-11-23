@@ -54,7 +54,8 @@ fn draw(
     let min_w = 0.;
     let max_h = get_max_value(&vec_a, &vec_v, &vec_x);
     let min_h = get_min_value(&vec_a, &vec_v, &vec_x);
-    let root_area = BitMapBackend::new("images/2.5.png", (600, 400)).into_drawing_area();
+
+    let root_area = BitMapBackend::new("images/wykres.png", (600, 400)).into_drawing_area();
     root_area.fill(&WHITE).unwrap();
     let drawing_area =
         SVGBackend::new("line_series_point_size.svg", (300, 200)).into_drawing_area();
@@ -66,6 +67,7 @@ fn draw(
         .build_cartesian_2d(min_w..max_w, min_h..max_h)
         .unwrap();
     ctx.configure_mesh().draw().unwrap();
+
     ctx.draw_series(LineSeries::new(vec_to_points(&vec_a, &vec_t), &BLACK))
         .unwrap();
     ctx.draw_series(LineSeries::new(vec_to_points(&vec_v, &vec_t), &BLUE))
@@ -73,6 +75,7 @@ fn draw(
     ctx.draw_series(LineSeries::new(vec_to_points(&vec_x, &vec_t), &RED))
         .unwrap();
 }
+
 fn vec_to_points(vec: &[f32], t: &[f32]) -> Vec<(f32, f32)> {
     vec.iter()
         .cloned()
